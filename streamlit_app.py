@@ -104,7 +104,7 @@ IMAGE_TYPES = ["png", "jpg"]
 
 EXTERNAL_DEPENDENCIES = {
     "example_cws_1.pkl": {
-        "url": "https://drive.google.com/file/d/100O-s83AsSy38N4sYxiLdlthL8IA8-KK/view?usp=sharing",
+        "url": "https://drive.google.com/uc?export=download&id=100O-s83AsSy38N4sYxiLdlthL8IA8-KK",
         "size": 179191543
     }
 }
