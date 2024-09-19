@@ -3,9 +3,9 @@ from fastai.vision.all import *
 import altair as alt
 import pandas as pd
 import os
-import urllib
 import platform
 import pathlib
+import gdown
 from PIL import ImageOps
 
 def main():
@@ -73,26 +73,10 @@ def download_file(file_path):
     try:
         weights_warning = st.warning(f"Downloading {file_path}...")
         progress_bar = st.progress(0)
-        with open(file_path, "wb") as output_file:
-            with urllib.request.urlopen(EXTERNAL_DEPENDENCIES[file_path]["url"]) as response:
-                length = response.info().get("Content-Length")
-                if length:
-                    length = int(length)
-                counter = 0.0
-                MEGABYTES = 2.0 ** 20.0
-                while True:
-                    data = response.read(8192)
-                    if not data:
-                        break
-                    counter += len(data)
-                    output_file.write(data)
-
-                    if length:
-                        weights_warning.warning(f"Downloading {file_path}... ({counter / MEGABYTES:.2f}/{length / MEGABYTES:.2f} MB)")
-                        progress_bar.progress(min(counter / length, 1.0))
-                    else:
-                        weights_warning.warning(f"Downloading {file_path}... ({counter / MEGABYTES:.2f} MB downloaded)")
-
+        
+        # Use gdown to download the file from Google Drive
+        gdown.download(EXTERNAL_DEPENDENCIES[file_path]["url"], file_path, quiet=False)
+        
     finally:
         if weights_warning is not None:
             weights_warning.empty()
@@ -117,3 +101,4 @@ EXTERNAL_DEPENDENCIES = {
 
 if __name__ == "__main__":
     main()
+
