@@ -3,3 +3,4 @@ fastai
 pillow
 altair
 pandas
+gdown
