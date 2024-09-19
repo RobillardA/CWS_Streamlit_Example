@@ -61,11 +61,13 @@ def load_model():
     return inf_model
 
 def download_file(file_path):
+    # Check if the file already exists and is the correct size
     if os.path.exists(file_path):
-        if "size" not in EXTERNAL_DEPENDENCIES[file_path]:
+        if "size" in EXTERNAL_DEPENDENCIES[file_path] and os.path.getsize(file_path) == EXTERNAL_DEPENDENCIES[file_path]["size"]:
             return
-        elif os.path.getsize(file_path) == EXTERNAL_DEPENDENCIES[file_path]["size"]:
-            return
+        else:
+            # If the size is incorrect, delete the file and re-download
+            os.remove(file_path)
 
     weights_warning, progress_bar = None, None
     try:
@@ -97,6 +99,11 @@ def download_file(file_path):
         if progress_bar is not None:
             progress_bar.empty()
     
+    # Verify file size after download
+    if os.path.getsize(file_path) != EXTERNAL_DEPENDENCIES[file_path]["size"]:
+        st.error(f"Failed to download {file_path} correctly. Size mismatch.")
+        os.remove(file_path)
+
     return
 
 IMAGE_TYPES = ["png", "jpg"]
