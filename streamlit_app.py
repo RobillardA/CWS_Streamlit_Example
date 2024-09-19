@@ -104,7 +104,7 @@ IMAGE_TYPES = ["png", "jpg"]
 
 EXTERNAL_DEPENDENCIES = {
     "example_cws_1.pkl": {
-        "url": "https://www.dropbox.com/s/y6qeecp8ten0jm1/example_cws_1.pkl?dl=1",
+        "url": "https://drive.google.com/file/d/100O-s83AsSy38N4sYxiLdlthL8IA8-KK/view?usp=sharing",
         "size": 179191543
     }
 }
