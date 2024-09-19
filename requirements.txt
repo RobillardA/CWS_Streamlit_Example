@@ -1,5 +1,5 @@
-streamlit==0.89
-fastai==2.2
-pillow==8.1
+streamlit
+fastai
+pillow
 altair
 pandas
